@@ -66,17 +66,17 @@ public class PersonFetchService {
      */
     private void saveUser(String userIds, Map<String, Object> conditions, Long groupId) throws JSONException {
         JSONObject response = getResponse(VK_USER_API.replace("${userId}", userIds));
-        JSONArray userInfos = response.getJSONArray("response");
+        JSONArray users = response.getJSONArray("response");
 
         StringBuilder sb = new StringBuilder("insert into user values ");
 
-        for (int i = 0; i < userInfos.length(); i++) {
-            JSONObject userInfoObject = userInfos.getJSONObject(i);
+        for (int i = 0; i < users.length(); i++) {
+            JSONObject userInfo = users.getJSONObject(i);
 
-            if (isValid(userInfoObject, conditions)) {
-                sb.append("(").append(userInfoObject.get("uid")).append(",'").append(userInfoObject.get("first_name"))
-                        .append("','").append(userInfoObject.get("last_name")).append("','")
-                        .append(userInfoObject.get("photo_big")).append("',").append(groupId).append("),");
+            if (isValid(userInfo, conditions)) {
+                sb.append("(").append(userInfo.get("uid")).append(",'").append(userInfo.get("first_name"))
+                        .append("','").append(userInfo.get("last_name")).append("','")
+                        .append(userInfo.get("photo_big")).append("',").append(groupId).append("),");
             }
         }
         sb.setLength(sb.length() - 1);
