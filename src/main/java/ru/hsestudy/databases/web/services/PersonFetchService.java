@@ -116,7 +116,7 @@ public class PersonFetchService {
         JSONObject response = getResponse(VK_USER_API.replace("${userId}", userIds));
         JSONArray users = response.getJSONArray("response");
 
-        StringBuilder sb = new StringBuilder("insert into user values ");
+        StringBuilder sb = new StringBuilder("replace into user values ");
 
         for (int i = 0; i < users.length(); i++) {
             JSONObject userInfo = users.getJSONObject(i);
@@ -178,9 +178,9 @@ public class PersonFetchService {
     }
 
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("WEB-INF/applicationContext.xml");
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         PersonFetchService fetchService = context.getBean(PersonFetchService.class);
-        fetchService.fetchPeople("mat25");
+        fetchService.fetchPeople("pihse");
     }
 
 }

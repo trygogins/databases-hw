@@ -21,7 +21,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> getUsersByGroup(Long groupId) {
-        return template.query("select * from rating r join user u on r.user_id = u.id where r.group_id = ?",
+        return template.query("select * from rating r join user u on r.user_id = u.id where r.group_id = ? order by rating desc",
                 new BeanPropertyRowMapper<>(User.class), groupId);
     }
 }
