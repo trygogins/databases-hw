@@ -2,12 +2,14 @@ package ru.hsestudy.databases.web.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 import ru.hsestudy.databases.web.dao.UserDao;
 import ru.hsestudy.databases.web.model.Pair;
-
-import java.util.Map;
 
 /**
  * @author georgii
@@ -31,8 +33,9 @@ public class VoteController {
     }
 
     @RequestMapping(value = "/vote/vote", method = RequestMethod.POST)
-    public void getCouple(@RequestBody Map<String, Long> idMap) {
-        userDao.increaseRating(idMap.get("userId"), idMap.get("groupId"));
+    public void getCouple(WebRequest webRequest) {
+        userDao.increaseRating(Long.parseLong(String.valueOf(webRequest.getParameter("userId"))),
+                Long.parseLong(String.valueOf(webRequest.getParameter("groupId"))));
     }
 
 }
