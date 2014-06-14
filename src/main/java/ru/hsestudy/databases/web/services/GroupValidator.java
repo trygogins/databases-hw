@@ -22,7 +22,8 @@ public class GroupValidator {
      * Осуществляет проверку корректности указанного URL - должна быть страница группы
      */
     public Boolean isGroup(String url) {
-        JSONObject response = fetchService.getResponse(url);
+        JSONObject response = fetchService.getResponse(
+                PersonFetchService.VK_GROUP_INFO_API.replace("${groupId}", getScreenName(url)));
         try {
             // если нет поля error - группа
             return response.get("error") == null;
@@ -33,7 +34,7 @@ public class GroupValidator {
     }
 
     public String getScreenName(String url) {
-        return url.substring(url.lastIndexOf("/"));
+        return url.substring(url.lastIndexOf("/") + 1);
     }
 
 }

@@ -1,5 +1,10 @@
-$('body').ready(function() { 
+$('body').ready(function() {
+    $('#rating_link').attr('href', '/rating/' + getParameterByName('group_id'));
 	get_pair();	
+})
+
+$('#next_pair').click(function() {
+    get_pair();
 })
 
 $('.round').click(function() {
@@ -21,8 +26,10 @@ function get_pair() {
 //		var data=$.parseJSON(resp);
 		$('#left_link').attr('href', 'http://vk.com/id'+data['left']['id']);
 		$('#right_link').attr('href', 'http://vk.com/id'+data['right']['id']);
-		$('#left').attr("src", data['left']['photoUrl']);
-		$('#right').attr("src", data['right']['photoUrl']);
+        $('#left').css("background-image", 'url(' + data['left']['photoUrl'] + ")");
+        $('#right').css("background-image", 'url(' + data['right']['photoUrl'] + ")");
+//		$('#left').attr("src", data['left']['photoUrl']);
+//		$('#right').attr("src", data['right']['photoUrl']);
 		left = data['left']['id'];
 		right = data['right']['id'];
 	})	
@@ -34,4 +41,6 @@ function getParameterByName(name) {
         results = regex.exec(location.search);
     return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
+
+
 

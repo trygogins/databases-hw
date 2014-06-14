@@ -6,7 +6,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>RATETHISMAN</title>
 </head>
-<body>
+<body style="margin: -13px;">
 	<div class="center">
 		<h1><a href="/">RATETHISMAN</a></h1> 
 	</div>
@@ -14,14 +14,16 @@
 		<h2>Just tap on guy you like. If no one, click the link below.</h2>
 	</div>
 	<div class="center">
-		<p>
-			<a href="" id="left_link"><img src="/resources/images/vk.png" width = "30" height = "30" ></a>
-			<img src="/resources/images/1.jpg" width = "350" height = "350" class ="round" id="left">
-			<img src="/resources/images/2.jpg" width = "350" height = "350" class ="round" id="right">
-			<a href="" id="right_link"><img src="/resources/images/vk.png" width = "30" height = "30"></a>
-		</p>
-		<span id="next_pair">Show me next pair!</span> 
-	</div>
+		<a target="_blank" href="" id="left_link"><img src="/resources/images/vk.png" width = "30" height = "30" ></a>
+        <div class="user_block round" id="left"></div>
+        <div class="user_block round" id="right"></div>
+        <!--<img src="/resources/images/1.jpg" width = "350" height = "350" class ="round" id="left">-->
+        <!--<img src="/resources/images/2.jpg" width = "350" height = "350" class ="round" id="right">-->
+        <a target="_blank" href="" id="right_link"><img src="/resources/images/vk.png" width = "30" height = "30"></a>
+		<br><br>
+		<span id="next_pair">Show me next pair!</span><br><br>
+        <a id="rating_link" href="">Go to the rating!</a>
+    </div>
 </body>
 <script type="text/javascript" src="/resources/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="/resources/js/vote.js"></script>

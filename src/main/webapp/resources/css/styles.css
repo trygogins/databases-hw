@@ -5,6 +5,15 @@ body {
     background-attachment: fixed;
 }
 
+a {
+    text-decoration: none;
+    color: #00ABAD;
+}
+
+h1 {
+    font-size: 40pt;
+}
+
 ul {
     list-style-type: none;
     width: 60%;
@@ -13,12 +22,18 @@ ul {
     padding-left: 0px;
 }
 
-ul li {
+ul li.user_li {
     width: 45%;
     float: left;
     margin-bottom: 20px;
     margin-left: 2.5%;
     margin-right: 2.5%;
+}
+
+ul li.group_li {
+    width: 100%;
+    float: left;
+    margin-bottom: 20px;
 }
 
 .logo, .group_name {
@@ -38,6 +53,7 @@ ul li {
     width: 400px;
     height: 400px;
     position: relative;
+    cursor: pointer;
 }
 
 .user_info {
@@ -75,8 +91,75 @@ ul li {
     border: 1px solid purple;
     margin-right: 20px;
     margin-left: 20px;
+    display: inline-block;
 }
 
-a {
-    text-decoration: none;
+#next_pair {
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 18pt;
+}
+
+.sub_lans {
+    position: relative;
+    display: inline-block;
+    width: 49.5%;
+    height: 100%;
+}
+
+.group_info, .group_down {
+    text-align: center;
+    height: 50px;
+}
+
+.group_info {
+    position: relative;
+    margin: 0 auto;
+    font-size: 16pt;
+    font-weight: 800;
+}
+
+.group_block {
+    position: relative;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.abs_center {
+    width: 50%;
+    height: 55%;
+    overflow: auto;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+}
+
+.group_button {
+    color: orange;
+    font-size: 16pt;
+}
+
+.group_input {
+    font-size: 18px;
+    color: #323232;
+    border-color: #bdbcbd;
+    border-width: 1px;
+    border-style: solid;
+    background: #ffffff;
+    border-radius: 5px;
+    width: 300px;
+    height: 38px;
+    text-indent: 10px;
+}
+
+.group_submit {
+    font-size: 18px;
+    color: white;
+    border-color: #bdbcbd;
+    border-width: 1px;
+    border-style: solid;
+    background: orange;
+    border-radius: 5px;
+    width: 120px;
+    height: 38px;
 }

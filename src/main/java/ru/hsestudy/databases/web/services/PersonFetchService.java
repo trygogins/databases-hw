@@ -1,11 +1,12 @@
 package ru.hsestudy.databases.web.services;
 
 import com.google.common.collect.ImmutableMap;
-import org.apache.commons.io.IOUtils;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -47,10 +48,10 @@ public class PersonFetchService {
      * Метод сохраняет участников указанной группы в базу
      * @param groupId - айдишник группы Вконтакте
      */
-    public void fetchPeople(final String groupId) {
+    public Long fetchPeople(final String groupId) {
         Long groupLongId = getGroupId(groupId);
         if (groupLongId < 0) {
-            return;
+            return null;
         }
 
         try {
@@ -68,6 +69,7 @@ public class PersonFetchService {
         } catch (JSONException e) {
             logger.error("unable to obtain users array - incorrect JSON structure", e);
         }
+        return groupLongId;
     }
 
     private String getGroupName(String groupId) {
@@ -167,7 +169,9 @@ public class PersonFetchService {
 
         try {
             HttpResponse response = client.execute(httpGet);
-            return new JSONObject(IOUtils.toString(response.getEntity().getContent()));
+            HttpEntity entity = response.getEntity();
+            String resp = EntityUtils.toString(entity, "UTF-8");
+            return new JSONObject(resp);
 
         } catch (IOException e) {
             logger.error("IO Exception", e);

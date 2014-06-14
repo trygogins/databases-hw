@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 import ru.hsestudy.databases.web.dao.GroupDao;
 import ru.hsestudy.databases.web.services.GroupValidator;
@@ -21,8 +23,6 @@ public class MainPageController {
     @Autowired
     private GroupValidator groupValidator;
 
-
-
 	@RequestMapping(value = {"/groups", "/"}, method = RequestMethod.GET)
 	public ModelAndView showGroups() {
         ModelAndView model = new ModelAndView("index");
@@ -31,15 +31,16 @@ public class MainPageController {
         return model;
     }
 
+    @ResponseBody
     @RequestMapping(value = "/groups/add", method = RequestMethod.POST)
-    public ModelAndView addGroup(String url) {
-        ModelAndView model = new ModelAndView("redirect:/groups");
+    public String addGroup(WebRequest webRequest) {
+        String url = String.valueOf(webRequest.getParameter("url"));
 
-        if (groupValidator.isGroup(url)) {
+        if (!groupValidator.isGroup(url)) {
+            ModelAndView model = new ModelAndView("redirect:/groups");
             model.addObject("error", "Неверно указан URL группы!");
         }
         // здесь происходит сохранение группы и её участников в базу
-        fetchService.fetchPeople(groupValidator.getScreenName(url));
-        return model;
+        return fetchService.fetchPeople(groupValidator.getScreenName(url)).toString();
     }
 }
