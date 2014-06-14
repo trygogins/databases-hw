@@ -1,23 +1,37 @@
-
 $('body').ready(function() { 
-	$.post('get_pair.jsp', {}, function(resp) {
+	get_pair();	
+})
+
+$('.round').click(function() {
+	var id = '';
+	if ($(this).attr('id') == 'left') {
+		id = left;
+	} else {
+		id = right;
+	}
+	$.post('vote/vote', {user_id: id, group_id: getParameterByName('group_id')});
+	get_pair();
+})
+
+var left = '';
+var right = '';
+
+function get_pair() {
+	$.get('vote.json?group_id='+getParameterByName('group_id'), {}, function(resp) {
 		var data=$.parseJSON(resp);
-		//if(data['status']==1)
-	})
-})
-	
-$('.round').click(function(){ 
-	var id = $(this).attr('id');
-	$.post('add_vote.jsp', {id: id});
-})
+		$('#left_link').attr('href', 'vk.com/id'+data['left']['id']);
+		$('#right_link').attr('href', 'vk.com/id'+data['right']['id']);
+		$('#left').attr("src", data['left']['photoUrl']);
+		$('#right').attr("src", data['right']['photoUrl']);
+		left = data['left']['id'];
+		right = data['right']['id'];
+	})	
+}
 
-$('#text_color').click(function(){ 
-//здесь код
-})
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
 
-
-#text_color - id твоей кнопки (картинки)
-$.post('add_pass.php', {key: "key", label:"label"}, function(resp) {
-	var data=$.parseJSON(resp);
-	//if(data['status']==1)
-})
