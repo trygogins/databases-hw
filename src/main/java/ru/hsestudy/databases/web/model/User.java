@@ -13,6 +13,7 @@ public class User {
     String firstName;
     String lastName;
     String photoUrl;
+    Integer rating;
 
     public Long getId() {
         return id;
@@ -44,5 +45,13 @@ public class User {
 
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
+    }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
     }
 }

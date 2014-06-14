@@ -11,6 +11,5 @@ import java.util.List;
 public interface UserDao {
 
     List<User> getUsersByGroup(Long groupId);
-    void saveUser(User user);
 
 }

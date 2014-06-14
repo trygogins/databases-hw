@@ -21,7 +21,9 @@ public class RatingController {
     @RequestMapping(value = "/rating/${groupId}", method = RequestMethod.POST)
     public ModelAndView getRating(@PathVariable("groupId") Long groupId) {
         ModelAndView model = new ModelAndView("rating");
-        return null;
+        model.addObject("users", userDao.getUsersByGroup(groupId));
+
+        return model;
     }
 
 }
