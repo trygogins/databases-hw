@@ -161,7 +161,7 @@ public class PersonFetchService {
      * @param url - url для получения ответа
      * @return HTTP-ответ в форме JSONObject
      */
-    private JSONObject getResponse(String url) {
+    public JSONObject getResponse(String url) {
         HttpClient client = HttpClientBuilder.create().build();
         HttpGet httpGet = new HttpGet(url);
 
