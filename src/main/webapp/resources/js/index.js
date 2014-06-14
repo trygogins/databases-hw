@@ -6,7 +6,7 @@ $('.group_submit').click(function() {
 
 $('.cross').click(function() {
 	var password = prompt("Please enter password");
-	$.post('groups/delere', {password:password}, function(resp) {
+	$.post('groups/delete', {password:password}, function(resp) {
 		window.location = "/";
 	});
 })
