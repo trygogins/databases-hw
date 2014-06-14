@@ -35,6 +35,7 @@
     <c:forEach items="${groups}" var="group">
     <li class="group_li">
         <div class="group_block">
+            <img class="cross" src="../../resources/images/cross.png">
             <div class="user_background" style="border-radius: 10px; z-index: -1;"></div>
             <div class="group_info"><div class="abs_center"><a href="http://vk.com/${group.screenName}" style="color: white;">${group.name}</a></div></div>
             <div class="group_down">
@@ -45,6 +46,10 @@
     </li>
     </c:forEach>
 </ul>
+<div class="bottom">
+  <a class="bottom_unit" href="mailto:support@thatman.ru">Send a feedback</a>
+  <div class="bottom_unit" onclick='alert("Oh, dear lord! Our card number is 0000 0000 0000 0000. Thanks for your support!")'>Donate</a>
+</div>  
 </body>
 <script type="text/javascript" src="/resources/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="/resources/js/index.js"></script>
