@@ -13,10 +13,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Map;
 
 /**
@@ -28,8 +36,9 @@ public class PersonFetchService {
 
     private static final Logger logger = LoggerFactory.getLogger(PersonFetchService.class);
 
-    public static final String VK_USER_API = "http://api.vk.com/method/users.get?uids=${userId}&fields=photo_big,sex";
+    public static final String VK_USER_API = "http://api.vk.com/method/users.get?uids=${userId}&fields=photo_big,photo_400_orig,sex";
     public static final String VK_GROUP_API = "http://api.vk.com/method/groups.getMembers?gid=${groupId}";
+    public static final String VK_GROUP_INFO_API = "http://api.vk.com/method/groups.getById?gid=${groupId}";
 
     @Autowired
     private JdbcTemplate template;
@@ -38,9 +47,34 @@ public class PersonFetchService {
      * Метод сохраняет участников указанной группы в базу
      * @param groupId - айдишник группы Вконтакте
      */
-    public void fetchPeople(Long groupId) {
+    public void fetchPeople(final String groupId) {
+        Long groupLongId;
         try {
-            JSONObject response = getResponse(VK_GROUP_API.replace("${groupId}", String.valueOf(groupId)));
+            groupLongId = template.queryForObject("select id from groups where screen_name = ?", Long.class, groupId);
+            logger.info("group already exists with id {}", groupLongId);
+
+            return;
+        } catch (EmptyResultDataAccessException e) {
+            groupLongId = -1l;
+        }
+
+        if (groupLongId < 0) {
+            KeyHolder keyHolder = new GeneratedKeyHolder();
+            template.update(new PreparedStatementCreator() {
+                @Override
+                public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+                    String sql = "insert into groups(name, screen_name) values('"
+                            + getGroupName(groupId) + "','" + groupId + "')";
+
+                    return connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                }
+            }, keyHolder);
+            groupLongId = keyHolder.getKey().longValue();
+        }
+
+
+        try {
+            JSONObject response = getResponse(VK_GROUP_API.replace("${groupId}", groupId));
             JSONArray userIds = response.getJSONObject("response").getJSONArray("users");
 
             // формируем список idшников для запроса к API пользователей
@@ -49,10 +83,21 @@ public class PersonFetchService {
                 sb.append(String.valueOf(userIds.get(i))).append(",");
             }
             sb.setLength(sb.length() - 1);
-            saveUser(sb.toString(), ImmutableMap.<String, Object>of("sex", 2), groupId);
+            saveUser(sb.toString(), ImmutableMap.<String, Object>of("sex", 2), groupLongId);
 
         } catch (JSONException e) {
             logger.error("unable to obtain users array - incorrect JSON structure", e);
+        }
+    }
+
+    private String getGroupName(String groupId) {
+        try {
+            JSONObject response = getResponse(VK_GROUP_INFO_API.replace("${groupId}", groupId));
+
+            return String.valueOf(response.getJSONArray("response").getJSONObject(0).get("name")).replaceAll("[^A-Za-z0-9а-яА-Я ]+", "");
+        } catch (JSONException e) {
+            logger.error("unable to parse group info", e);
+            return "empty";
         }
     }
 
@@ -74,9 +119,19 @@ public class PersonFetchService {
             JSONObject userInfo = users.getJSONObject(i);
 
             if (isValid(userInfo, conditions)) {
-                sb.append("(").append(userInfo.get("uid")).append(",'").append(userInfo.get("first_name"))
+                Integer uid = (Integer) userInfo.get("uid");
+
+                template.update("insert into rating values (?,?,0)", uid, groupId);
+
+                Object photo;
+                try {
+                    photo = userInfo.get("photo_400_orig");
+                } catch (JSONException e) {
+                    photo = userInfo.get("photo_big");
+                }
+                sb.append("(").append(uid).append(",'").append(userInfo.get("first_name"))
                         .append("','").append(userInfo.get("last_name")).append("','")
-                        .append(userInfo.get("photo_big")).append("',").append(groupId).append("),");
+                        .append(photo).append("'),");
             }
         }
         sb.setLength(sb.length() - 1);
@@ -122,7 +177,7 @@ public class PersonFetchService {
     public static void main(String[] args) {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
         PersonFetchService fetchService = context.getBean(PersonFetchService.class);
-        fetchService.fetchPeople(29040404l);
+        fetchService.fetchPeople("mat25");
     }
 
 }
