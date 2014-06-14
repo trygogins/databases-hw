@@ -3,6 +3,7 @@ package ru.hsestudy.databases.web.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import ru.hsestudy.databases.web.dao.UserDao;
 import ru.hsestudy.databases.web.model.Pair;
 
@@ -17,6 +18,14 @@ public class VoteController {
 
     @Autowired
     private UserDao userDao;
+
+    @RequestMapping(value = "/vote", method = RequestMethod.GET)
+    public ModelAndView getVotePage(@RequestParam(value = "group_id") Long groupId) {
+        ModelAndView model = new ModelAndView("vote");
+        model.addObject("pair", userDao.getRandomPair(groupId));
+
+        return model;
+    }
 
     @ResponseBody
     @RequestMapping(value = "/vote.json", method = RequestMethod.GET)
