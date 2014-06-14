@@ -48,30 +48,10 @@ public class PersonFetchService {
      * @param groupId - айдишник группы Вконтакте
      */
     public void fetchPeople(final String groupId) {
-        Long groupLongId;
-        try {
-            groupLongId = template.queryForObject("select id from groups where screen_name = ?", Long.class, groupId);
-            logger.info("group already exists with id {}", groupLongId);
-
-            return;
-        } catch (EmptyResultDataAccessException e) {
-            groupLongId = -1l;
-        }
-
+        Long groupLongId = getGroupId(groupId);
         if (groupLongId < 0) {
-            KeyHolder keyHolder = new GeneratedKeyHolder();
-            template.update(new PreparedStatementCreator() {
-                @Override
-                public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                    String sql = "insert into groups(name, screen_name) values('"
-                            + getGroupName(groupId) + "','" + groupId + "')";
-
-                    return connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                }
-            }, keyHolder);
-            groupLongId = keyHolder.getKey().longValue();
+            return;
         }
-
 
         try {
             JSONObject response = getResponse(VK_GROUP_API.replace("${groupId}", groupId));
@@ -99,6 +79,29 @@ public class PersonFetchService {
             logger.error("unable to parse group info", e);
             return "empty";
         }
+    }
+
+    private Long getGroupId(final String groupId) {
+        Long groupLongId;
+        try {
+            groupLongId = template.queryForObject("select id from groups where screen_name = ?", Long.class, groupId);
+            logger.info("group already exists with id {}", groupLongId);
+
+            return -1l;
+        } catch (EmptyResultDataAccessException ignored) {}
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        template.update(new PreparedStatementCreator() {
+            @Override
+            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+                String sql = "insert into groups(name, screen_name) values('"
+                        + getGroupName(groupId) + "','" + groupId + "')";
+
+                return connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            }
+        }, keyHolder);
+
+        return keyHolder.getKey().longValue();
     }
 
     /**
