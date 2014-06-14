@@ -178,7 +178,7 @@ public class PersonFetchService {
     }
 
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("WEB-INF/applicationContext.xml");
         PersonFetchService fetchService = context.getBean(PersonFetchService.class);
         fetchService.fetchPeople("mat25");
     }

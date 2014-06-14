@@ -13,13 +13,14 @@ import ru.hsestudy.databases.web.dao.UserDao;
  * @since 6/14/14
  */
 @Controller
+@RequestMapping("/")
 public class RatingController {
 
     @Autowired
     private UserDao userDao;
 
-    @RequestMapping(value = "/rating/${groupId}", method = RequestMethod.POST)
-    public ModelAndView getRating(@PathVariable("groupId") Long groupId) {
+    @RequestMapping(value = "/rating/{group_id}", method = RequestMethod.GET)
+    public ModelAndView getRating(@PathVariable("group_id") Long groupId) {
         ModelAndView model = new ModelAndView("rating");
         model.addObject("users", userDao.getUsersByGroup(groupId));
 
