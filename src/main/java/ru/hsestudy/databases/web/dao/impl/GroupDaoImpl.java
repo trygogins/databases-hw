@@ -21,12 +21,6 @@ public class GroupDaoImpl implements GroupDao {
 
     @Override
     public List<Group> getGroups() {
-        // TODO:
-        return template.query("select * from groups limit 20", new BeanPropertyRowMapper<>(Group.class));
-    }
-
-    @Override
-    public void saveGroup(Group group) {
-        template.update("replace into groups(screen_name, name) values(?, ?)", group.getScreenName(), group.getName());
+        return template.query("select * from groups", new BeanPropertyRowMapper<>(Group.class));
     }
 }

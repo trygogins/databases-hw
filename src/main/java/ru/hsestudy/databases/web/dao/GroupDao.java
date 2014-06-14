@@ -11,6 +11,5 @@ import java.util.List;
 public interface GroupDao {
 
     List<Group> getGroups();
-    void saveGroup(Group group);
 
 }
