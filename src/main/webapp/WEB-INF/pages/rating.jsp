@@ -16,10 +16,10 @@
   <ul>
     <c:forEach items="${users}" var="user">
     <li>
-      <div class="user_block" style="background-image: url(${user.image});">
+      <div class="user_block" style="background-image: url(${user.photoUrl});">
         <div class="user_info">
           <div class="user_background"></div>
-          <span class="user_text">${user.name} ${user.surname}, ${user.rating}</span>
+          <span class="user_text">${user.firstName} ${user.lastName}, ${user.rating}</span>
         </div>
       </div>
     </li>
