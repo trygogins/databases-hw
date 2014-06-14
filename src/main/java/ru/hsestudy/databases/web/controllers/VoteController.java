@@ -21,10 +21,7 @@ public class VoteController {
 
     @RequestMapping(value = "/vote", method = RequestMethod.GET)
     public ModelAndView getVotePage(@RequestParam(value = "group_id") Long groupId) {
-        ModelAndView model = new ModelAndView("vote");
-        model.addObject("pair", userDao.getRandomPair(groupId));
-
-        return model;
+        return new ModelAndView("vote");
     }
 
     @ResponseBody
