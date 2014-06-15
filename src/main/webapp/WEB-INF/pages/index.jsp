@@ -37,9 +37,9 @@
         <div class="group_block">
             <img class="cross" src="../../resources/images/cross.png">
             <div class="user_background" style="border-radius: 10px; z-index: -1;"></div>
-            <div class="group_info"><div class="abs_center"><a href="http://vk.com/${group.screenName}" style="color: white;">${group.name}</a></div></div>
+            <div class="group_info"><div class="abs_center"><a href = "/vote?group_id=${group.id}" style="color: white;">${group.name}</a></div></div>
             <div class="group_down">
-                <div class ="sub_lans"><div class="abs_center"> <a class="group_button" href = "/vote?group_id=${group.id}"> Vote </a> </div></div>
+                <div class ="sub_lans"><div class="abs_center"> <a class="group_button" href="http://vk.com/${group.screenName}"> vk.com </a> </div></div>
                 <div class ="sub_lans"><div class="abs_center"> <a class="group_button" href = "/rating/${group.id}"> Rating </a> </div> </div>
             </div>
         </div>
