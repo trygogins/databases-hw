@@ -15,7 +15,7 @@ $('.group_submit').click(function() {
 $('.cross').click(function() {
 	var password = prompt("Please enter password");
 	$.post('groups/delete', {password:password, groupId: this.getAttribute('id')}, function(resp) {
-        window.location = "/";
+        window.location = "/groups";
         window.location.reload();
     });
 })
