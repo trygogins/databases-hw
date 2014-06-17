@@ -11,5 +11,6 @@ import java.util.List;
 public interface GroupDao {
 
     List<Group> getGroups();
+    void deleteGroup(Long groupId);
 
 }

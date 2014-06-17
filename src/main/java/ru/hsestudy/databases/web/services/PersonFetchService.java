@@ -49,14 +49,18 @@ public class PersonFetchService {
      * @param groupId - айдишник группы Вконтакте
      */
     public Long fetchPeople(final String groupId) {
-        Long groupLongId = getGroupId(groupId);
-        if (groupLongId < 0) {
-            return null;
-        }
-
         try {
             JSONObject response = getResponse(VK_GROUP_API.replace("${groupId}", groupId));
+            if (response.has("error")) {
+                response = getResponse(VK_GROUP_API.replace("${groupId}", groupId.replace("club", "")));
+            }
             JSONArray userIds = response.getJSONObject("response").getJSONArray("users");
+
+            // вставка группы в базу
+            Long groupLongId = getGroupId(groupId);
+            if (groupLongId < 0) {
+                return -1l;
+            }
 
             // формируем список idшников для запроса к API пользователей
             StringBuilder sb = new StringBuilder();
@@ -66,10 +70,11 @@ public class PersonFetchService {
             sb.setLength(sb.length() - 1);
             saveUser(sb.toString(), ImmutableMap.<String, Object>of("sex", 2), groupLongId);
 
+            return groupLongId;
         } catch (JSONException e) {
             logger.error("unable to obtain users array - incorrect JSON structure", e);
+            return -1l;
         }
-        return groupLongId;
     }
 
     private String getGroupName(String groupId) {

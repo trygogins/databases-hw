@@ -1,11 +1,16 @@
 package ru.hsestudy.databases.web.services;
 
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
+import org.apache.commons.io.IOUtils;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
 
 /**
  * @author georgii
@@ -22,13 +27,14 @@ public class GroupValidator {
      * Осуществляет проверку корректности указанного URL - должна быть страница группы
      */
     public Boolean isGroup(String url) {
-        JSONObject response = fetchService.getResponse(
-                PersonFetchService.VK_GROUP_INFO_API.replace("${groupId}", getScreenName(url)));
         try {
-            // если нет поля error - группа
-            return response.get("error") == null;
-        } catch (JSONException e) {
-            logger.info("error parsing json from {}", url);
+            HttpClient client = HttpClientBuilder.create().build();
+            HttpResponse response = client.execute(new HttpGet(url));
+            String responseBody = IOUtils.toString(response.getEntity().getContent(), "UTF-8");
+
+            return responseBody.contains("fm=group");
+        } catch (IOException e) {
+            logger.error("error fetching group", e);
             return false;
         }
     }

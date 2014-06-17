@@ -23,4 +23,10 @@ public class GroupDaoImpl implements GroupDao {
     public List<Group> getGroups() {
         return template.query("select * from groups", new BeanPropertyRowMapper<>(Group.class));
     }
+
+    @Override
+    public void deleteGroup(Long groupId) {
+        template.batchUpdate(new String[] {"delete from rating where group_id = " + groupId,
+                "delete from groups where id = " + groupId});
+    }
 }

@@ -28,14 +28,16 @@
             window.location = "/vote?group_id=${groupId}"
         </script>
     </c:if>
-    <c:if test="${not empty error}">
-        <div>${error}</div>
-    </c:if>
+    <script>
+        if (document.URL.indexOf("error") > 0) {
+            alert("Unable to add group due to incorrect url!");
+        }
+    </script>
 
     <c:forEach items="${groups}" var="group">
     <li class="group_li">
         <div class="group_block">
-            <img class="cross" src="../../resources/images/cross.png">
+            <img class="cross" src="../../resources/images/cross.png" id="${group.id}">
             <div class="user_background" style="border-radius: 10px; z-index: -1;"></div>
             <div class="group_info"><div class="abs_center"><a href = "/vote?group_id=${group.id}" style="color: white;">${group.name}</a></div></div>
             <div class="group_down">

@@ -14,6 +14,8 @@ import ru.hsestudy.databases.web.services.PersonFetchService;
 @Controller
 public class MainPageController {
 
+    public static final String PASSWORD = "thecreators";
+
     @Autowired
     private GroupDao groupDao;
 
@@ -37,10 +39,22 @@ public class MainPageController {
         String url = String.valueOf(webRequest.getParameter("url"));
 
         if (!groupValidator.isGroup(url)) {
-            ModelAndView model = new ModelAndView("redirect:/groups");
-            model.addObject("error", "Неверно указан URL группы!");
+            return "error";
         }
         // здесь происходит сохранение группы и её участников в базу
-        return fetchService.fetchPeople(groupValidator.getScreenName(url)).toString();
+        Long groupId = fetchService.fetchPeople(groupValidator.getScreenName(url));
+        return groupId < 0 ? "error" : groupId.toString();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/groups/delete", method = RequestMethod.POST)
+    public ModelAndView deleteGroup(WebRequest webRequest) {
+        String password = String.valueOf(webRequest.getParameter("password"));
+        Long groupId = Long.parseLong(String.valueOf(webRequest.getParameter("groupId")));
+
+        if (PASSWORD.equals(password)) {
+            groupDao.deleteGroup(groupId);
+        }
+        return new ModelAndView("redirect:/groups");
     }
 }
