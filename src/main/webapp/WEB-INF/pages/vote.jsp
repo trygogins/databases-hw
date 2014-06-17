@@ -8,7 +8,7 @@
 </head>
 <body style="margin: -13px;">
 	<div class="center">
-		<h1><a href="/">RATETHISMAN</a></h1> 
+		<h1><a href="/groups">RATETHISMAN</a></h1>
 	</div>
 	<div class="group_name">
 		<h2>Just tap on guy you like. If no one, click the link below.</h2>

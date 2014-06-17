@@ -10,7 +10,7 @@
 <body>
   <div class="logo">
     <!-- <img src="src/logo.png"> -->
-    <h1><a href="/">RATETHISMAN</a></h1>
+    <h1><a href="/groups">RATETHISMAN</a></h1>
   </div>  
   <div class="group_name">
     <h2>Ratings for group ${groupId}</h2>
