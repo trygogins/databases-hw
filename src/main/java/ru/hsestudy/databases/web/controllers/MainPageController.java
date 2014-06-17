@@ -43,7 +43,7 @@ public class MainPageController {
         }
         // здесь происходит сохранение группы и её участников в базу
         Long groupId = fetchService.fetchPeople(groupValidator.getScreenName(url));
-        return groupId < 0 ? "error" : groupId.toString();
+        return groupId < 0 ? "error" : groupId == 0 ? "warning" : groupId.toString();
     }
 
     @ResponseBody

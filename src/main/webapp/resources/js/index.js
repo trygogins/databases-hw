@@ -4,6 +4,10 @@ $('.group_submit').click(function() {
             window.location = "/groups?error";
             return;
         }
+        if (resp == "warning") {
+            window.location = "/groups?warning";
+            return;
+        }
         window.location = "/vote?group_id=" + resp;
     });
 });

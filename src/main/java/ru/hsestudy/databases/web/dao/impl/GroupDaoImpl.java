@@ -41,7 +41,6 @@ public class GroupDaoImpl implements GroupDao {
         });
         Joiner j = Joiner.on(",");
 
-        // удаление записи о группе и записей о рейтингах в этой группе
         template.batchUpdate(new String[]{"delete u from user u join rating r on r.user_id = u.id where group_id = " + groupId +
                 " and user_id in (" + j.join(userIds) + ")",
                 "delete from rating where group_id = " + groupId,

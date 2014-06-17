@@ -32,6 +32,9 @@
         if (document.URL.indexOf("error") > 0) {
             alert("Unable to add group due to incorrect url!");
         }
+        if (document.URL.indexOf("warning") > 0) {
+            alert("Sorry, you can't add group with more than 500 members");
+        }
     </script>
 
     <c:forEach items="${groups}" var="group">

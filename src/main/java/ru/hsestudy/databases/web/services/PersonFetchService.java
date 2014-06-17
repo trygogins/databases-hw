@@ -56,6 +56,10 @@ public class PersonFetchService {
             }
             JSONArray userIds = response.getJSONObject("response").getJSONArray("users");
 
+            // если в группе больше 500 человек - не добавляем
+            if (Long.parseLong(String.valueOf(response.getJSONObject("response").get("count"))) > 500) {
+                return 0l;
+            }
             // вставка группы в базу
             Long groupLongId = getGroupId(groupId);
 
