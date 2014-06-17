@@ -33,7 +33,7 @@ public class VoteController {
     }
 
     @RequestMapping(value = "/vote/vote", method = RequestMethod.POST)
-    public void getCouple(WebRequest webRequest) {
+    public void increaseRating(WebRequest webRequest) {
         userDao.increaseRating(Long.parseLong(String.valueOf(webRequest.getParameter("userId"))),
                 Long.parseLong(String.valueOf(webRequest.getParameter("groupId"))));
     }

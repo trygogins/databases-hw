@@ -58,9 +58,6 @@ public class PersonFetchService {
 
             // вставка группы в базу
             Long groupLongId = getGroupId(groupId);
-            if (groupLongId < 0) {
-                return -1l;
-            }
 
             // формируем список idшников для запроса к API пользователей
             StringBuilder sb = new StringBuilder();
@@ -94,7 +91,7 @@ public class PersonFetchService {
             groupLongId = template.queryForObject("select id from groups where screen_name = ?", Long.class, groupId);
             logger.info("group already exists with id {}", groupLongId);
 
-            return -1l;
+            return groupLongId;
         } catch (EmptyResultDataAccessException ignored) {}
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -131,13 +128,17 @@ public class PersonFetchService {
             if (isValid(userInfo, conditions)) {
                 Integer uid = (Integer) userInfo.get("uid");
 
-                template.update("insert into rating values (?,?,0)", uid, groupId);
+                template.update("replace into rating values (?,?,0)", uid, groupId);
 
                 Object photo;
                 try {
                     photo = userInfo.get("photo_400_orig");
                 } catch (JSONException e) {
                     photo = userInfo.get("photo_big");
+                }
+                if (String.valueOf(photo).contains("vk.com/images")) {
+                    logger.warn("user #{} - no photo!", uid);
+                    continue;
                 }
                 sb.append("(").append(uid).append(",'").append(userInfo.get("first_name"))
                         .append("','").append(userInfo.get("last_name")).append("','")

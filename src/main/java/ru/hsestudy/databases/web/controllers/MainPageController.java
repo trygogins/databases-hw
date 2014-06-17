@@ -55,6 +55,6 @@ public class MainPageController {
         if (PASSWORD.equals(password)) {
             groupDao.deleteGroup(groupId);
         }
-        return new ModelAndView("redirect:/groups");
+        return new ModelAndView("redirect:/");
     }
 }
