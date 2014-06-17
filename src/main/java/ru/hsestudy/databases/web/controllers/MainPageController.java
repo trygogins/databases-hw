@@ -25,7 +25,7 @@ public class MainPageController {
     @Autowired
     private GroupValidator groupValidator;
 
-	@RequestMapping(value = {"/groups", "/"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/", "/groups"}, method = RequestMethod.GET)
 	public ModelAndView showGroups() {
         ModelAndView model = new ModelAndView("index");
         model.addObject("groups", groupDao.getGroups());
