@@ -10,11 +10,11 @@ html, body {
     min-height: 100%;
     height: auto !important;
     height: 100%;
-    margin: 0 auto -142px; /* the bottom margin is the negative value of the footer's height */
+    margin: 0 auto -80px; /* the bottom margin is the negative value of the footer's height */
 }
 
 .footer, .push {
-    height: 142px; /* .push must be the same height as .footer */
+    height: 80px; /* .push must be the same height as .footer */
 }
 
 body {
@@ -74,6 +74,7 @@ ul li.group_li {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;
+    background-color: rgb(251,247,236);
     border: 1px solid #ccc;
     border-radius: 10px;
     width: 100%;
@@ -211,8 +212,8 @@ ul li.group_li {
 }
 
 .bottom {
-    position: relative;
-    top: 70px;
+    /*position: relative;*/
+    /*top: 40px;*/
     text-align: center;
     width: 98%;
     display: inline-block;
