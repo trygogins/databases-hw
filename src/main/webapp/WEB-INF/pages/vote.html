@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="/resources/css/styles.css">
+	<link rel="stylesheet" type="text/css" href="../../resources/css/styles.css">
 	<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>RATETHISMAN</title>

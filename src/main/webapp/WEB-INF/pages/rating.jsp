@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Rating</title>
-  <link rel="stylesheet" type="text/css" href="/resources/css/styles.css">
+  <link rel="stylesheet" type="text/css" href="../../resources/css/styles.css">
   <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 </head>
 <body>
