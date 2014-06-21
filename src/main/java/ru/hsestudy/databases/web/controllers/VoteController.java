@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
+import ru.hsestudy.databases.web.dao.GroupDao;
 import ru.hsestudy.databases.web.dao.UserDao;
 import ru.hsestudy.databases.web.model.Pair;
 
@@ -21,8 +22,14 @@ public class VoteController {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private GroupDao groupDao;
+
     @RequestMapping(value = "/vote", method = RequestMethod.GET)
     public ModelAndView getVotePage(@RequestParam(value = "group_id") Long groupId) {
+        if (!groupDao.exists(groupId)) {
+            return new ModelAndView("redirect:/groups");
+        }
         return new ModelAndView("vote");
     }
 

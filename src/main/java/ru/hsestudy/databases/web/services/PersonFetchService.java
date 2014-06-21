@@ -54,7 +54,6 @@ public class PersonFetchService {
             if (response.has("error")) {
                 response = getResponse(VK_GROUP_API.replace("${groupId}", groupId.replace("club", "")));
             }
-            JSONArray userIds = response.getJSONObject("response").getJSONArray("users");
 
             // если в группе больше 500 человек - не добавляем
             long count = Long.parseLong(String.valueOf(response.getJSONObject("response").get("count")));
@@ -64,6 +63,7 @@ public class PersonFetchService {
             // вставка группы в базу
             Long groupLongId = getGroupId(groupId);
 
+            JSONArray userIds = response.getJSONObject("response").getJSONArray("users");
             // формируем список idшников для запроса к API пользователей
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < userIds.length(); i++) {

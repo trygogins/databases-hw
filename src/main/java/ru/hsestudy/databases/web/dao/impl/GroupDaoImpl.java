@@ -46,4 +46,9 @@ public class GroupDaoImpl implements GroupDao {
                 "delete from rating where group_id = " + groupId,
                 "delete from groups where id = " + groupId});
     }
+
+    @Override
+    public boolean exists(Long groupId) {
+        return template.queryForObject("select count(*) from groups where id = ?", Integer.class, groupId) > 0;
+    }
 }

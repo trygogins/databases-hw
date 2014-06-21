@@ -12,5 +12,6 @@ public interface GroupDao {
 
     List<Group> getGroups();
     void deleteGroup(Long groupId);
+    boolean exists(Long groupId);
 
 }
