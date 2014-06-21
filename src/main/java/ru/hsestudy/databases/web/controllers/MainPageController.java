@@ -48,13 +48,13 @@ public class MainPageController {
 
     @ResponseBody
     @RequestMapping(value = "/groups/delete", method = RequestMethod.POST)
-    public ModelAndView deleteGroup(WebRequest webRequest) {
+    public String deleteGroup(WebRequest webRequest) {
         String password = String.valueOf(webRequest.getParameter("password"));
         Long groupId = Long.parseLong(String.valueOf(webRequest.getParameter("groupId")));
 
         if (PASSWORD.equals(password)) {
             groupDao.deleteGroup(groupId);
         }
-        return new ModelAndView("redirect:/");
+        return "ok";
     }
 }
