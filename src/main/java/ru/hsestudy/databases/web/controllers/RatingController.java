@@ -29,7 +29,7 @@ public class RatingController {
             return new ModelAndView("redirect:/groups");
         }
         ModelAndView model = new ModelAndView("rating");
-        model.addObject("groupId", groupId);
+        model.addObject("group", groupDao.getGroupInfo(groupId));
         model.addObject("users", userDao.getUsersByGroup(groupId));
 
         return model;

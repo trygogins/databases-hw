@@ -10,6 +10,7 @@ import java.util.List;
  */
 public interface GroupDao {
 
+    Group getGroupInfo(Long groupId);
     List<Group> getGroups();
     void deleteGroup(Long groupId);
     boolean exists(Long groupId);

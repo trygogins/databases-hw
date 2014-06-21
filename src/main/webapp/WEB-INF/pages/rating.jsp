@@ -14,7 +14,7 @@
     <h1><a href="/groups">RATETHISMAN</a></h1>
   </div>  
   <div class="group_name">
-    <h2>Ratings for group ${groupId}</h2>
+    <h2>Ratings for group "${group.name}"</h2>
   </div> 
   <ul>
     <c:forEach items="${users}" var="user">

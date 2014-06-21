@@ -25,6 +25,11 @@ public class GroupDaoImpl implements GroupDao {
     private JdbcTemplate template;
 
     @Override
+    public Group getGroupInfo(Long groupId) {
+        return template.queryForObject("select * from groups where id = ?", new BeanPropertyRowMapper<>(Group.class), groupId);
+    }
+
+    @Override
     public List<Group> getGroups() {
         return template.query("select * from groups", new BeanPropertyRowMapper<>(Group.class));
     }
