@@ -31,7 +31,7 @@ a {
 }
 
 h1 {
-    font-size: 40pt;
+    font-size: 55pt;
 }
 
 ul {
@@ -61,8 +61,13 @@ ul li.group_li {
     text-align: center;
 }
 
+.logo {
+    margin-top: 50px;
+}
+
 .group_name {
-    margin-bottom: 40px;
+    margin-top: 20px;
+    margin-bottom: 60px;
 }
 
 .user_block {
@@ -209,6 +214,7 @@ ul li.group_li {
     top: 90px;
     text-align: center;
     width: 98%;
+    display: inline-block;
 }
 
 .bottom_unit {

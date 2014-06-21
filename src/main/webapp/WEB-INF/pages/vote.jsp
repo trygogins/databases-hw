@@ -8,7 +8,7 @@
 </head>
 <body style="margin: -13px;">
 <div class="wrapper">
-	<div class="center">
+	<div class="logo">
 		<h1><a href="/groups">RATETHISMAN</a></h1>
 	</div>
 	<div class="group_name">
