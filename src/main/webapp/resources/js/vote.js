@@ -8,30 +8,48 @@ $('#next_pair').click(function() {
 })
 
 $('.round').click(function() {
-	var id = '';
+	var selectedUser = '';
 	if ($(this).attr('id') == 'left') {
-		id = left;
+		selectedUser = left;
 	} else {
-		id = right;
+		selectedUser = right;
 	}
-	$.post('vote/vote', {userId: id, groupId: getParameterByName('group_id')});
-	get_pair();
+    var ok = true;
+    $.ajax({
+        beforeSend: function(xhrObj) {
+            xhrObj.setRequestHeader("Content-Type", "application/json");
+            xhrObj.setRequestHeader("Accept", "application/json");
+        },
+        type: "POST",
+        url: 'vote/vote?token=' + token,
+        data: JSON.stringify(selectedUser),
+        dataType: "json",
+        success: function(resp) {
+            if (resp == "no") {
+                window.location = "/vote?groupId=" + getParameterByName('group_id');
+                ok = false;
+            }
+        }
+    })
+    if (ok) {
+        get_pair();
+    }
 })
 
-var left = '';
-var right = '';
+var left;
+var right;
+var token;
 
 function get_pair() {
 	$.get('vote.json?group_id='+getParameterByName('group_id'), {}, function(data) {
-//		var data=$.parseJSON(resp);
-		$('#left_link').attr('href', 'http://vk.com/id'+data['left']['id']);
-		$('#right_link').attr('href', 'http://vk.com/id'+data['right']['id']);
-        $('#left').css("background-image", 'url(' + data['left']['photoUrl'] + ")");
-        $('#right').css("background-image", 'url(' + data['right']['photoUrl'] + ")");
-//		$('#left').attr("src", data['left']['photoUrl']);
-//		$('#right').attr("src", data['right']['photoUrl']);
-		left = data['left']['id'];
-		right = data['right']['id'];
+		var pair = data['pair'];
+        $('#left_link').attr('href', 'http://vk.com/id'+pair['left']['id']);
+		$('#right_link').attr('href', 'http://vk.com/id'+pair['right']['id']);
+        $('#left').css("background-image", 'url(' + pair['left']['photoUrl'] + ")");
+        $('#right').css("background-image", 'url(' + pair['right']['photoUrl'] + ")");
+		left = pair['left'];
+		right = pair['right'];
+        token = data['token']
 	})	
 }
 

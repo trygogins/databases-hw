@@ -37,6 +37,8 @@ public class UserDaoImpl implements UserDao {
         if (users.size() < 2) {
             return null;
         }
+        users.get(0).setGroupId(groupId);
+        users.get(1).setGroupId(groupId);
 
         return new Pair(users.get(0), users.get(1));
     }

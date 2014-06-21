@@ -15,6 +15,8 @@ public class User {
     String photoUrl;
     Integer rating;
 
+    Long groupId;
+
     public Long getId() {
         return id;
     }
@@ -54,4 +56,18 @@ public class User {
     public void setRating(Integer rating) {
         this.rating = rating;
     }
+
+    public Long getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Long groupId) {
+        this.groupId = groupId;
+    }
+
+    @Override
+    public boolean equals(Object u) {
+        return  u instanceof User && ((User) u).id.equals(this.id);
+    }
+
 }
