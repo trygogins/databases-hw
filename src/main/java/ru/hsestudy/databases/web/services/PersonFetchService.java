@@ -83,7 +83,7 @@ public class PersonFetchService {
         try {
             JSONObject response = getResponse(VK_GROUP_INFO_API.replace("${groupId}", groupId));
 
-            return String.valueOf(response.getJSONArray("response").getJSONObject(0).get("name")).replaceAll("[^A-Za-z0-9а-яА-Я ]+", "");
+            return String.valueOf(response.getJSONArray("response").getJSONObject(0).get("name")).replaceAll("[^A-Za-z0-9а-яА-Я \\-]+", "");
         } catch (JSONException e) {
             logger.error("unable to parse group info", e);
             return "empty";
