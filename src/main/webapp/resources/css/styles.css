@@ -113,6 +113,8 @@ ul li.group_li {
     margin-right: 20px;
     margin-left: 20px;
     display: inline-block;
+    height: 400px;
+    width: 400px;
 }
 
 #next_pair {
@@ -219,7 +221,7 @@ ul li.group_li {
     font-weight: 800;
 }
 
-@media screen and (max-width: 780px) {
+@media screen and (max-device-width: 780px) {
     ul li.user_li {
         width: 100%;
         margin-left: 0%; 
@@ -231,7 +233,7 @@ ul li.group_li {
     }
 }
 
-@media screen and (max-width: 460px) {
+@media screen and (max-device-width: 460px) {
     ul {
         width: 90%;
         margin-left: 5%; 
