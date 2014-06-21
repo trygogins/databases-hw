@@ -1,8 +1,28 @@
+* {
+    margin: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -142px; /* the bottom margin is the negative value of the footer's height */
+}
+
+.footer, .push {
+    height: 142px; /* .push must be the same height as .footer */
+}
+
 body {
     font-family: 'Roboto Condensed', sans-serif,Arial;
     font-weight: 100;
     background-image: url("../images/back.jpg");
     background-attachment: fixed;
+    background-repeat: round;
 }
 
 a {
@@ -176,7 +196,7 @@ ul li.group_li {
 
 .bottom {
     position: absolute;
-    bottom: 20px;
+    bottom: 10px;
     text-align: center;
     width: 98%;
 }
@@ -186,4 +206,17 @@ ul li.group_li {
     margin-left: 20px;
     margin-right: 20px;
     cursor: pointer;
+}
+
+@media screen and (max-width: 680px) {
+    ul {
+        width: 100%;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .user_block {
+        width: 350px;
+        height: 350px;
+    }
 }

@@ -7,6 +7,7 @@
 	<title>RATETHISMAN</title>
 </head>
 <body style="margin: -13px;">
+<div class="wrapper">
 	<div class="center">
 		<h1><a href="/groups">RATETHISMAN</a></h1>
 	</div>
@@ -24,6 +25,14 @@
 		<span id="next_pair">Show me next pair!</span><br><br>
         <a id="rating_link" href="">Go to the rating!</a>
     </div>
+    <div class="push"></div>
+</div> 
+<div class="footer">
+    <div class="bottom">
+        <a class="bottom_unit" href="mailto:support@thatman.ru">Send a feedback</a>
+        <div class="bottom_unit" onclick='alert("Oh, dear lord! Our card number is 0000 0000 0000 0000. Thanks for your support!")'>Donate</div>
+    </div> 
+</div>
 </body>
 <script type="text/javascript" src="/resources/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="/resources/js/vote.js"></script>

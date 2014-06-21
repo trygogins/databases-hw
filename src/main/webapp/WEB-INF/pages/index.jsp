@@ -8,6 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body>
+<div class="wrapper">
 <div class="logo">
     <!-- <img src="src/logo.png"> -->
     <h1><a href="/groups">RATETHISMAN</a></h1>
@@ -50,11 +51,15 @@
         </div>
     </li>
     </c:forEach>
-</ul>
-<div class="bottom">
-  <a class="bottom_unit" href="mailto:support@thatman.ru">Send a feedback</a>
-  <div class="bottom_unit" onclick='alert("Oh, dear lord! Our card number is 0000 0000 0000 0000. Thanks for your support!")'>Donate</a>
-</div>  
+    </ul>
+    <div class="push"></div>
+    </div> 
+    <div class="footer">
+        <div class="bottom">
+            <a class="bottom_unit" href="mailto:support@thatman.ru">Send a feedback</a>
+            <div class="bottom_unit" onclick='alert("Oh, dear lord! Our card number is 0000 0000 0000 0000. Thanks for your support!")'>Donate</div>
+        </div> 
+    </div>
 </body>
 <script type="text/javascript" src="/resources/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="/resources/js/index.js"></script>
