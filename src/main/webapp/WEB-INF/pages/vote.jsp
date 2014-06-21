@@ -4,12 +4,12 @@
 	<link rel="stylesheet" type="text/css" href="../../resources/css/styles.css">
 	<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>RATETHISMAN</title>
+	<title>Voting | RATE THIS GUY</title>
 </head>
 <body style="margin: -13px;">
 <div class="wrapper">
 	<div class="logo">
-		<h1><a href="/groups">RATETHISMAN</a></h1>
+		<h1><a href="/groups">RATE THIS GUY</a></h1>
 	</div>
 	<div class="group_name">
 		<h2>Just tap on guy you like. If no one, click the link below.</h2>

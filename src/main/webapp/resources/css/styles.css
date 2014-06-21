@@ -76,8 +76,8 @@ ul li.group_li {
     background-size: contain;
     border: 1px solid #ccc;
     border-radius: 10px;
-    width: 100%;
-    height: 100%;
+    width: 500px;
+    height: 500px;
     position: relative;
     cursor: pointer;
 }
@@ -211,7 +211,7 @@ ul li.group_li {
 
 .bottom {
     position: relative;
-    top: 90px;
+    top: 70px;
     text-align: center;
     width: 98%;
     display: inline-block;
@@ -227,7 +227,7 @@ ul li.group_li {
     font-weight: 800;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1000px) {
     ul li.user_li {
         width: 100%;
         margin-left: 0%; 
