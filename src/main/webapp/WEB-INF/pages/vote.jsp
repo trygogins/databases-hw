@@ -6,7 +6,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Voting | RATE THIS GUY</title>
 </head>
-<body style="margin: -13px;">
+<body>
 <div class="wrapper">
 	<div class="logo">
 		<h1><a href="/groups">RATE THIS GUY</a></h1>
@@ -29,11 +29,11 @@
 </div> 
 <div class="footer">
     <div class="bottom">
-        <a class="bottom_unit" href="mailto:support@thatman.ru">Send a feedback</a>
-        <div class="bottom_unit" onclick='alert("Oh, dear lord! Our card number is 0000 0000 0000 0000. Thanks for your support!")'>Donate</div>
+        <div class="bottom_unit">About</div>
     </div> 
 </div>
 </body>
-<script type="text/javascript" src="/resources/js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="/resources/js/vote.js"></script>
+<script type="text/javascript" src="../../resources/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../../resources/js/vote.js"></script>
+<script type="text/javascript" src="../../resources/js/main.js"></script>
 </html>
