@@ -60,7 +60,7 @@
     </div> 
     </div>
 </body>
-<script type="text/javascript" src="../../resources/js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="../../resources/js/index.js"></script>
-<script type="text/javascript" src="../../resources/js/main.js"></script>
+<script type="text/javascript" src="/resources/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/resources/js/index.js"></script>
+<script type="text/javascript" src="/resources/js/main.js"></script>
 </html>
